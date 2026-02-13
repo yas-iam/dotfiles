@@ -1,0 +1,322 @@
+
+
+
+
+
+### Variables for settings ###
+set $mod Mod4
+set $smod Shift
+
+# Matrix Purple Theme Colorr
+set $bg-color            #080808
+set $inactive-bg-color   #1c0333
+set $text-color          #bdbdbd
+set $active-border-color #8839ef
+set $neon-purple         #ae81ff
+
+# Window Colors:         border               background         text          indicator
+client.focused           $active-border-color $bg-color          $neon-purple  $active-border-color
+client.unfocused         $inactive-bg-color   $bg-color          $text-color   $inactive-bg-color
+client.focused_inactive  $inactive-bg-color   $bg-color          $text-color   $inactive-bg-color
+# --- ADDED: F-Key Media Bindings (Standard) ---
+# F5 -> Mute
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+# F6 -> Volume Down
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+# F7 -> Volume Up
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+
+
+
+# --- Font and Sizing ---
+set $wm_setting_font pango:JetBrainsMono Nerd Font Mono 12
+set $wm_setting_gap_width 15
+set $wm_setting_gap_heigth 15
+set $wm_setting_border_size 4
+set $wm_setting_key_left Left
+set $wm_setting_key_down Down
+set $wm_setting_key_up Up
+set $wm_setting_key_right Right
+
+gaps outer 5
+gaps top 60
+default_border pixel $wm_setting_border_size
+
+# --- Applications ---
+set $wm_setting_app_terminal kitty -e tmux
+set $wm_setting_app_browser firefox
+set $wm_setting_app_launcher rofi -show drun
+
+# --- THEME: PURPLE MATRIX / ULTRAVIOLET ---
+# Main Dark Background (Pure Black)
+set $wm_color_background #000000
+
+# Active Window (Neon Purple)
+set $wm_color_border_active_bg #8A2BE2
+set $wm_color_border_active_fg #000000
+
+# Inactive Window (Dark Violet/Black)
+set $wm_color_border_inactive_bg #1a001a
+set $wm_color_border_inactive_fg #4B0082
+
+# --- i3bar Settings ---
+set $bar_setting_position top
+set $bar_setting_mode dock
+set $bar_setting_font pango:Adwaita Mono 10
+set $bar_setting_separator " / "
+set $bar_setting_statusCommand i3blocks
+set $bar_setting_trayoutput full
+
+# --- i3bar Colors ---
+set $bar_color_background #000000
+set $bar_color_foreground #E6E6FA
+set $bar_color_statusline #E6E6FA
+set $bar_color_separator #8A2BE2
+
+# Workspace Focused (Neon Purple)
+set $bar_color_workspace_focused_bg #8A2BE2
+set $bar_color_workspace_focused_fg #000000
+
+# Workspace Active (Medium Purple)
+set $bar_color_workspace_active_bg #4B0082
+set $bar_color_workspace_active_fg #E6E6FA
+
+# Workspace Inactive (Black/Dark)
+set $bar_color_workspace_inactive_bg #000000
+set $bar_color_workspace_inactive_fg #666666
+
+# Workspace Urgent (Hot Pink)
+set $bar_color_workspace_urgent_bg #FF00FF
+set $bar_color_workspace_urgent_fg #000000
+
+### Applications ###
+bindsym $mod+Return exec $wm_setting_app_terminal
+bindsym $mod+$smod+Return exec $wm_setting_app_browser
+
+### Workspaces ###
+set $ws1 " 1 "
+set $ws2 " 2 "
+set $ws3 " 3 "
+set $ws4 " 4 "
+set $ws5 " 5 "
+set $ws6 " 6 "
+set $ws7 " 7 "
+set $ws8 " 8 "
+set $ws9 " 9 "
+set $ws10 " 10 "
+
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+bindsym $mod+$smod+1 move container to workspace $ws1
+bindsym $mod+$smod+2 move container to workspace $ws2
+bindsym $mod+$smod+3 move container to workspace $ws3
+bindsym $mod+$smod+4 move container to workspace $ws4
+bindsym $mod+$smod+5 move container to workspace $ws5
+bindsym $mod+$smod+6 move container to workspace $ws6
+bindsym $mod+$smod+7 move container to workspace $ws7
+bindsym $mod+$smod+8 move container to workspace $ws8
+bindsym $mod+$smod+9 move container to workspace $ws9
+bindsym $mod+$smod+0 move container to workspace $ws10
+
+### Window sizes and positions ###
+bindsym $mod+$wm_setting_key_left focus left
+bindsym $mod+$wm_setting_key_down focus down
+bindsym $mod+$wm_setting_key_up focus up
+bindsym $mod+$wm_setting_key_right focus right
+
+bindsym $mod+$smod+$wm_setting_key_left move left
+bindsym $mod+$smod+$wm_setting_key_down move down
+bindsym $mod+$smod+$wm_setting_key_up move up
+bindsym $mod+$smod+$wm_setting_key_right move right
+
+mode "resize" {
+    bindsym $wm_setting_key_left resize shrink width 10 px or 10 ppt
+    bindsym $wm_setting_key_down resize grow height 10 px or 10 ppt
+    bindsym $wm_setting_key_up resize shrink height 10 px or 10 ppt
+    bindsym $wm_setting_key_right resize grow width 10 px or 10 ppt
+
+    bindsym $smod+$wm_setting_key_left gaps horizontal minus 5
+    bindsym $smod+$wm_setting_key_down gaps horizontal plus 5
+    bindsym $smod+$wm_setting_key_up gaps vertical minus 5
+    bindsym $smod+$wm_setting_key_right gaps vertical plus 5
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+
+### Gaps ###
+gaps horizontal $wm_setting_gap_width
+gaps vertical $wm_setting_gap_heigth
+
+### Borders ###
+default_border pixel $wm_setting_border_size
+default_floating_border pixel $wm_setting_border_size
+
+### Colors Logic ###
+client.focused $wm_color_border_active_bg $wm_color_border_active_bg $wm_color_border_active_fg $wm_color_border_active_bg $wm_color_border_active_bg
+client.focused_inactive $wm_color_border_inactive_bg $wm_color_border_inactive_bg $wm_color_border_inactive_fg $wm_color_border_inactive_bg $wm_color_border_inactive_bg
+client.unfocused $wm_color_border_inactive_bg $wm_color_border_inactive_bg $wm_color_border_inactive_fg $wm_color_border_inactive_bg $wm_color_border_inactive_bg
+client.urgent $wm_color_border_inactive_bg $wm_color_border_inactive_bg $wm_color_border_inactive_fg $wm_color_border_inactive_bg $wm_color_border_inactive_bg
+client.placeholder $wm_color_border_inactive_bg $wm_color_border_inactive_bg $wm_color_border_inactive_fg $wm_color_border_inactive_bg $wm_color_border_inactive_bg
+client.background $wm_color_background
+
+# FORCE OVERRIDE for any Xresources leak
+set $purple #8A2BE2
+client.focused $purple $purple #000000 $purple
+
+### i3bar Block ###
+# bar {
+   # position top
+  #  mode dock
+ #   font pango:JetBrainsMono Nerd Font Mono 10
+    #separator_symbol " | "
+   # status_command i3blocks
+  #  tray_output primary
+##    colors {
+        # ... (other settings keep the same) ...
+#
+   #     # FOCUSED WORKSPACE:
+  #      # Border: Purple | Background: Purple | Text: White
+ #       focused_workspace  #8A2BE2 #8A2BE2 #FFFFFF
+#
+  #      # ... (keep active/inactive/urgent as they are) ...
+ #   }
+#}
+### Miscellaneous settings ###
+font $wm_setting_font
+floating_modifier $mod
+bindsym $mod+f fullscreen toggle
+bindsym $mod+$smod+f floating toggle
+bindsym $mod+q kill
+bindsym $mod+$smod+r restart
+bindsym $mod+Shift+e exec i3-msg exit
+exec_always --no-startup-id xsetroot -solid "#000000"
+exec_always --no-startup-id nm-applet
+bindsym $mod+$smod+q exec systemctl poweroff
+
+# Monitor Setup
+exec_always --no-startup-id xrandr --output HDMI-1 --mode 1920x1080 --left-of eDP-1 --output eDP-1 --mode 1920x1080 --primary
+
+# Audio
+
+# Screenshot
+#bindsym $mod+$smod+s exec --no-startup-id ~/.config/i3blocks/scripts/screenshot.sh
+
+# Wallpaper
+exec_always --no-startup-id feh --bg-fill '/home/emoon/Downloads/444wallpaper.jpg'
+
+# Shortcuts
+bindsym Mod1+Shift+space exec firefox https://chat.openai.com
+bindsym Mod1+space exec firefox https://gemini.google.com
+bindsym Mod1+o exec obsidian
+bindsym $mod+v split v
+bindsym $mod+space focus mode_toggle
+
+# Apps
+bindsym $mod+l exec slock
+bindsym $mod+Shift+z exec --no-startup-id /home/emoon/scripts/record.sh
+bindsym Control+space exec --no-startup-id dunstctl close
+bindsym Control+Shift+space exec --no-startup-id dunstctl close-all
+
+# Auto Launch
+exec_always --no-startup-id picom -b --config ~/.config/picom/picom.conf.aesthetic
+bindsym $mod+Shift+n exec --no-startup-id redshift -O 4000 -P
+for_window [class="Weston"] floating enable
+
+# Assignments
+assign [class="Spotify"] $ws3
+exec --no-startup-id udiskie --tray
+exec --no-startup-id dunst
+bindsym $mod+Shift+p exec --no-startup-id ~/toggle_picom.sh
+exec --no-startup-id /usr/lib/xdg-desktop-portal &
+# Yazi File Picker Rules
+for_window [class="yazi-picker"] floating enable
+for_window [class="yazi-picker"] resize set 800 600
+for_window [class="yazi-picker"] move position center
+for_window [class="yazi-picker"] border pixel 0
+# Start autotiling (requires python-i3ipc)
+# Start authentication agent
+exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
+
+# Open CAVA in a terminal on Workspace 9
+# Add a 60-pixel gap at the top for Polybar
+### Auto Launch & Compositor ###
+# Use the .aesthetic config we built for Hyprland animations
+# Start the Flameshot daemon in the background on login
+exec --no-startup-id flameshot
+
+# Use the 'gui' subcommand to actually take a screenshot
+# We use Mod+Shift+S like your existing config
+# Update your existing screenshot line
+# 'flameshot gui -d 500' adds a 500ms delay to let animations finish
+bindsym $mod+$smod+s exec --no-startup-id "flameshot gui"
+# Line 16 update
+# Update line 10 
+bindsym $mod+$smod+a exec --no-startup-id ~/.config/rofi/powermenu.sh
+# Match the top gap to the bar height + offset
+gaps top 55
+gaps outer 12
+gaps inner 15
+
+# Set window border thickness to match Polybar's 2pt
+
+# Start the live Matrix rain
+# --- 1. CLEANUP: REMOVE MANUAL TOP GAPS ---
+# Polybar is in 'dock' mode now, so i3 reserves the space automatically.
+gaps outer 10
+gaps inner 8
+
+# --- 2. BORDER PERSISTENCE ---
+# Matching your Polybar's 2pt glow
+default_border pixel 2
+default_floating_border pixel 2
+smart_borders on
+smart_gaps off
+
+# --- 3. UNIFIED STARTUP (Only run these ONCE) ---
+exec_always --no-startup-id picom -b --config ~/.config/picom/picom.conf.aesthetic
+exec_always --no-startup-id feh --bg-fill '/home/emoon/Downloads/444wallpaper.jpg'
+exec_always --no-startup-id ~/.config/i3/scripts/autotiling.sh &
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec_always --no-startup-id ~/.config/i3/scripts/matrix_bg.sh
+exec --no-startup-id flameshot
+
+# --- 4. COLOR SYNC ---
+# class                 border    backgr.   text    indicator child_border
+client.focused          #ae81ff   #ae81ff   #000000 #ae81ff   #ae81ff
+client.focused_inactive #120321   #120321   #E6E6FA #120321   #120321
+client.unfocused        #120321   #120321   #E6E6FA #120321   #120321
+# OLD: bindsym $mod+p exec rofi -show drun
+# NEW: Matrix Splash Launcher
+bindsym $mod+p exec --no-startup-id ~/.config/rofi/matrix_launch.sh
+# Force the Matrix window to be floating and invisible to the tiler
+for_window [instance="xwinwrap"] floating enable, border none, focus mode_toggle
+bindsym $mod+m exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+# Volume Up (Win + Page Up)
+bindsym $mod+Prior exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+
+# Volume Down (Win + Page Down)
+bindsym $mod+Next exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+# WiFi Menu (Super +<D-C>
+bindsym $mod+w exec --no-startup-id rofi-wifi-menu
+
+exec --no-startup-id copyq
+# Start the clipboard daemon silently
+exec --no-startup-id clipmenud
+
+# Bind Mod+Shift+v to open the text menu
+bindsym $mod+Shift+c exec --no-startup-id copyq toggle
+# Execute the display setup script on startup

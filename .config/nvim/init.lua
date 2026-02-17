@@ -178,3 +178,9 @@ vim.api.nvim_create_user_command("LiveServerToggle", function()
 end, {})
 
 vim.keymap.set("n", "<leader>l", ":LiveServerToggle<CR>")
+-- Enable persistent undo
+vim.opt.undofile = true
+
+-- Optional: Set a specific directory for undo files 
+-- (Default is usually ~/.local/state/nvim/undo/)
+vim.opt.undodir = vim.fn.expand("~/.local/state/nvim/undo//")
